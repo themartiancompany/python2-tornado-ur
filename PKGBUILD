@@ -6,6 +6,8 @@
 # Contributor: Thomas Dziedzic < gostrc at gmail >
 
 _py="python2"
+_pkg="tornado"
+_proj="${_pkg}web"
 pkgname="${_py}-${_pkg}"
 pkgver=5.1.1
 pkgrel=3
@@ -23,7 +25,6 @@ arch=(
   'aarch64'
   'mips'
 )
-_proj="${_pkg}web"
 url="https://www.${_proj}.org"
 license=(
   'Apache'
@@ -35,9 +36,9 @@ depends=(
 )
 optdepends=(
   "${_py}-monotonic: enable support for a monotonic clock"
-  "${_py}-pycurl: for tornado.curl_httpclient"
-  "${_py}-twisted: for tornado.platform.twisted"
-  # 'python2-pycares: an alternative non-blocking DNS resolver'
+  "${_py}-pycurl: for ${_pkg}.curl_httpclient"
+  "${_py}-twisted: for ${_pkg}.platform.twisted"
+  # "${_py}-pycares: an alternative non-blocking DNS resolver"
 )
 makedepends=(
   "${_py}-setuptools"
@@ -48,6 +49,14 @@ checkdepends=(
   "${_py}-twisted"
   "${_py}-trollius"
   "${_py}-monotonic"
+)
+provides=(
+  "${_pkg}=${pkgver}"
+  "${_pkg}2=${pkgver}"
+)
+conflicts=(
+  "${_pkg}=${pkgver}"
+  "${_pkg}2=${pkgver}"
 )
 _ns="${_proj}"
 _http="https://github.com"
